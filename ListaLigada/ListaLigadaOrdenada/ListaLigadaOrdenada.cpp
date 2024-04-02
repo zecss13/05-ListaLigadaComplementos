@@ -17,6 +17,7 @@ void exibirElementos();
 void inserirElemento();
 void excluirElemento();
 void buscarElemento();
+NO* posicaoElemento(int numero);
 //--------------------------
 
 
@@ -144,5 +145,9 @@ void excluirElemento()
 
 }
 
+void buscarElemento()
+{
+
+}
 
 
