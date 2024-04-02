@@ -20,7 +20,6 @@ void buscarElemento();
 NO* posicaoElemento(int numero);
 //--------------------------
 
-
 int main()
 {
 	menu();
