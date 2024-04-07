@@ -8,6 +8,7 @@ struct NO {
 };
 
 NO* primeiro = NULL;
+NO* ultimo = NULL;
 
 // headers
 void menu();
@@ -19,6 +20,7 @@ void excluirElemento();
 void buscarElemento();
 NO* posicaoElemento(int numero);
 //--------------------------
+
 
 int main()
 {
@@ -127,26 +129,86 @@ void inserirElemento()
 	if (primeiro == NULL)
 	{
 		primeiro = novo;
+		ultimo = novo;
 	}
 	else
 	{
 		// procura o final da lista
-		NO* aux = primeiro;
-		while (aux->prox != NULL) {
-			aux = aux->prox;
-		}
-		aux->prox = novo;
+		ultimo->prox = novo;
+		ultimo = novo;
 	}
 }
 
 void excluirElemento()
 {
+	NO* aux = primeiro;
+	if (primeiro == NULL) {
+		cout << "Lista vazia \n";
+		return;
+	}
+	NO* anterior = NULL;
 
+	int valor;
+
+	cout << "Digite o elemento para excluir: ";
+	cin >> valor;
+
+	if (posicaoElemento(valor) == NULL) {
+		cout << "Valor nao encontrado na lista. \n";
+	}
+	while (aux != NULL) {
+		if (aux->valor == valor) {
+			if (anterior == NULL) {
+				primeiro = aux->prox;
+			}
+			else {
+				anterior->prox = aux->prox;
+			}
+			free(aux);
+			cout << "Elemento excluido da lista.\n";
+			return;
+		}
+		else {
+			anterior = aux;
+			aux = aux->prox;
+		}
+	}
 }
 
 void buscarElemento()
 {
-
+	if (primeiro == NULL) {
+		cout << "Lista vazia \n";
+		return;
+	}
+	else {
+		int valor;
+		cout << "Digite o elemento para buscar: ";
+		cin >> valor;
+		if (posicaoElemento(valor) == NULL) {
+			cout << "Elemento nao encontrado";
+			return;
+		}
+		cout << "Elemento encontrado";
+	}
 }
+
+
+
+// retorna um ponteiro para o elemento buscado
+// ou NULL se o elemento não estiver na lista
+NO* posicaoElemento(int numero)
+{
+	NO* aux = primeiro;
+	while (aux != NULL) {
+		if (aux->valor == numero)
+		{
+			break;
+		}
+		aux = aux->prox;
+	}
+	return aux;
+}
+
 
 
